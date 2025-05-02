@@ -7,7 +7,8 @@ import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
 
 // Demo data for favorites - set to empty array
-const demoFavorites = [];
+const demoFavorites: any[] = [];
+
 
 export default function Favorites() {
   const { t } = useLanguage();
