@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FiChevronRight, FiSearch, FiHeart, FiShoppingCart, FiX, FiFilter, FiChevronDown } from 'react-icons/fi';
+import {
+  FiChevronRight, FiSearch, FiHeart, FiShoppingCart,
+  FiX, FiFilter, FiChevronDown
+} from 'react-icons/fi';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
 
-// Demo data for favorites
-const demoFavorites = [
+// Tip tanımı eklendi
+type FavoriteItem = {
+  id: number;
+  nameKey: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  image: string;
+  href: string;
+  inStock: boolean;
+  isNew: boolean;
+};
+
+// Tipli demoFavorites dizisi
+const demoFavorites: FavoriteItem[] = [
   {
     id: 1,
     nameKey: 'products.silverNecklace',
@@ -53,6 +69,7 @@ const demoFavorites = [
     isNew: false
   }
 ];
+
 
 export default function Favorites() {
   const { t } = useLanguage();
