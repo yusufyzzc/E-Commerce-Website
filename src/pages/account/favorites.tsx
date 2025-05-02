@@ -6,9 +6,53 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
 
-// Demo data for favorites - set to empty array
-const demoFavorites: any[] = [];
-
+// Demo data for favorites
+const demoFavorites = [
+  {
+    id: 1,
+    nameKey: 'products.silverNecklace',
+    price: 149.99,
+    originalPrice: 179.99,
+    discount: 16,
+    image: '/images/products/gumus kaplama kolye.jpg',
+    href: '/product/gumus-kaplama-kolye',
+    inStock: true,
+    isNew: false
+  },
+  {
+    id: 2,
+    nameKey: 'products.pearlBracelet',
+    price: 129.99,
+    originalPrice: 159.99,
+    discount: 18,
+    image: '/images/products/inci bileklik.jpeg',
+    href: '/product/inci-bileklik',
+    inStock: true,
+    isNew: true
+  },
+  {
+    id: 3,
+    nameKey: 'products.decorativeCandleSet',
+    price: 89.99,
+    originalPrice: 89.99,
+    discount: 0,
+    image: '/images/products/dekoratif_mum_seti.png',
+    href: '/product/dekoratif-mum-seti',
+    inStock: true,
+    isNew: false
+  },
+  {
+    id: 4,
+    nameKey: 'products.blueStuffedBear',
+    price: 69.99,
+    originalPrice: 99.99,
+    discount: 30,
+    image: '/images/products/mavi_pelus_ayicik.jpeg',
+    href: '/product/mavi-pelus-ayicik',
+    inStock: false,
+    isNew: false
+  }
+];
 
 export default function Favorites() {
   const { t } = useLanguage();
@@ -312,4 +356,4 @@ export default function Favorites() {
       <Footer />
     </div>
   );
-} 
+}
