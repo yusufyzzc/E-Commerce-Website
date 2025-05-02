@@ -22,6 +22,7 @@ type FavoriteItem = {
   isNew: boolean;
 };
 
+
 // Tipli demoFavorites dizisi
 const demoFavorites: FavoriteItem[] = [
   {
