@@ -13,22 +13,6 @@ This project is a modern e-commerce platform utilizing blue color schemes, devel
 - Search functionality
 - and more...
 
-
-## Project Structure
-
-```
-blue-commerce/
-├── src/
-│   ├── components/       # Components
-│   ├── pages/            # Pages
-│   ├── public/           # Static files
-│   │   └── images/       # Images
-│   └── styles/           # CSS files
-├── package.json
-├── tailwind.config.js
-└── tsconfig.json
-```
-
 ## Technologies Used
 
 - [React](https://reactjs.org/)
