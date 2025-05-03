@@ -35,6 +35,9 @@ npm-error.log*
 .env.development
 .env.production
 
+# firebase config
+firebaseConfig.ts
+stripeKey.ts
 # vercel
 .vercel
 
@@ -54,4 +57,6 @@ logs/
 # dist files
 /dist
 
-ecommerce-site/node_modules/
+
+
+
