@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,18 +6,31 @@ import { FiChevronRight, FiMail, FiLock } from 'react-icons/fi';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// Form veri tipi
+interface FormData {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+// Hata tipi
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
 export default function Login() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
     rememberMe: false
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -25,8 +38,8 @@ export default function Login() {
     }));
   };
 
-  const validate = () => {
-    const newErrors = {};
+  const validate = (): FormErrors => {
+    const newErrors: FormErrors = {};
     
     // Validate email
     if (!formData.email) {
@@ -43,7 +56,7 @@ export default function Login() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors = validate();
     

@@ -5,9 +5,21 @@ import { FiChevronRight, FiShoppingCart, FiTrash2, FiPlus, FiMinus, FiShoppingBa
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// Sepet öğesi için tip tanımı
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  quantity: number;
+  image: string;
+  sku: string;
+  inStock: boolean;
+};
+
 export default function Cart() {
   // Initialize empty cart
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [couponCode, setCouponCode] = useState('');
   const [couponError, setCouponError] = useState('');
   const [couponSuccess, setCouponSuccess] = useState('');
@@ -31,7 +43,7 @@ export default function Cart() {
   }, []);
   
   // Update quantity of an item
-  const updateQuantity = (id, newQuantity) => {
+  const updateQuantity = (id: number, newQuantity: number): void => {
     if (newQuantity < 1) return;
     
     const updatedCart = cartItems.map(item => 
@@ -43,14 +55,14 @@ export default function Cart() {
   };
   
   // Remove an item from cart
-  const removeItem = (id) => {
+  const removeItem = (id: number): void => {
     const updatedCart = cartItems.filter(item => item.id !== id);
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
   
   // Apply coupon code
-  const applyCoupon = (e) => {
+  const applyCoupon = (e: React.FormEvent): void => {
     e.preventDefault();
     
     setCouponError('');
@@ -143,7 +155,7 @@ export default function Cart() {
                                 {/* Price */}
                                 <div className="mt-1 flex items-center">
                                   <span className="text-sm font-medium text-gray-900">{item.price.toFixed(2)} ₺</span>
-                                  {item.originalPrice > item.price && (
+                                  {item.originalPrice && item.originalPrice > item.price && (
                                     <span className="ml-2 text-sm text-gray-500 line-through">{item.originalPrice.toFixed(2)} ₺</span>
                                   )}
                                 </div>

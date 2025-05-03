@@ -7,8 +7,31 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
 
+// Ürün tipi tanımlama
+type Product = {
+  id: number;
+  nameKey: string;
+  name?: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  image: string;
+  href: string;
+  isNew: boolean;
+};
+
+// Kategori detayları tipi tanımlama
+type CategoryDetail = {
+  titleKey: string;
+  descriptionKey: string;
+  color: string;
+};
+
+// Type-safe kategori detayları
+type CategorySlugs = 'yeni-urunler' | 'indirimli-urunler' | 'taki-aksesuar' | 'susleme-hobi' | 'ambalaj-sunum' | 'parti-etkinlik' | 'ev-yasam' | 'plus-oyuncak';
+
 // Kategori ürünleri
-const categoryProducts = {
+const categoryProducts: Partial<Record<CategorySlugs, Product[]>> = {
   'yeni-urunler': [
     {
       id: 1,
@@ -296,7 +319,7 @@ const categoryProducts = {
 };
 
 // Kategori başlıklarını ve açıklamalarını tanımla
-const categoryDetails = {
+const categoryDetails: Record<CategorySlugs, CategoryDetail> = {
   'yeni-urunler': {
     titleKey: 'categories.newArrivals.title',
     descriptionKey: 'categories.newArrivals.description',
@@ -348,7 +371,9 @@ export default function CategoryPage() {
   const categorySlug = typeof slug === 'string' ? slug : '';
   
   // Kategori bilgisini al
-  const categoryData = categoryDetails[categorySlug];
+  const categoryData = categorySlug in categoryDetails 
+    ? categoryDetails[categorySlug as CategorySlugs] 
+    : null;
   
   const category = categoryData ? {
     title: t(categoryData.titleKey),
@@ -361,7 +386,9 @@ export default function CategoryPage() {
   };
   
   // Kategori ürünlerini al
-  const productsData = categoryProducts[categorySlug] || [];
+  const productsData = categorySlug in categoryProducts 
+    ? categoryProducts[categorySlug as CategorySlugs] || []
+    : [];
   
   // Ürün adlarını çeviri sistemi üzerinden geçir
   const products = productsData.map(product => ({

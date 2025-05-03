@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,8 +7,37 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useLanguage } from '../context/LanguageContext';
 
+// Tip tanımlamaları
+type Language = 'tr' | 'en';
+
+type ProductDescription = {
+  tr: string;
+  en: string;
+};
+
+type ProductFeature = {
+  tr: string[];
+  en: string[];
+};
+
+type Product = {
+  id: number;
+  nameKey: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  image: string;
+  href: string;
+  isNew: boolean;
+  inStock: boolean;
+  category: string;
+  categoryEn: string;
+  description: ProductDescription;
+  features: ProductFeature;
+};
+
 // Demo data for search results
-const allProducts = [
+const allProducts: Product[] = [
   {
     id: 1,
     nameKey: 'products.pelusAyicikAnahtarlik.name',
@@ -211,12 +240,12 @@ const allProducts = [
 
 export default function Search() {
   const router = useRouter();
-  const { t, language } = useLanguage();
   const { q } = router.query;
+  const { t, language } = useLanguage();
   const searchQuery = typeof q === 'string' ? q : '';
   
-  const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [newSearch, setNewSearch] = useState(searchQuery);
 
   // Perform search
@@ -230,7 +259,7 @@ export default function Search() {
         const results = allProducts.filter(product => {
           const name = t(product.nameKey).toLowerCase();
           const category = (language === 'en' ? product.categoryEn : product.category).toLowerCase();
-          const description = product.description[language].toLowerCase();
+          const description = product.description[language as Language].toLowerCase();
           const query = searchQuery.toLowerCase();
           
           return name.includes(query) || 
@@ -248,11 +277,16 @@ export default function Search() {
   }, [searchQuery, t, language]);
 
   // Handle new search submission
-  const handleSearch = (e) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newSearch.trim()) {
       router.push(`/search?q=${encodeURIComponent(newSearch)}`);
     }
+  };
+
+  // Handle search input change
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewSearch(e.target.value);
   };
 
   return (
@@ -300,7 +334,7 @@ export default function Search() {
                 className="input pr-10 w-full"
                 placeholder={t('general.searchPlaceholder')}
                 value={newSearch}
-                onChange={(e) => setNewSearch(e.target.value)}
+                onChange={handleSearchChange}
               />
               {newSearch && (
                 <button
@@ -384,7 +418,7 @@ export default function Search() {
                             </Link>
                             
                             <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                              {product.description[language]}
+                              {product.description[language as Language]}
                             </p>
                             
                             <div className="flex items-center mb-3">
