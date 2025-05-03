@@ -26,7 +26,7 @@ type FavoriteItem = {
 
 
 // Tipli demoFavorites dizisi
-const demoFavorites: FavoriteItem[] = [
+let demoFavorites: FavoriteItem[] = [
   {
     id: 1,
     nameKey: 'products.silverNecklace',

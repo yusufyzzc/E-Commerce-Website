@@ -6,6 +6,22 @@ import { FiChevronRight, FiFilter, FiSearch, FiDownload, FiArrowLeft } from 'rea
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
+// Define types for order data
+type OrderItem = {
+  name: string;
+  quantity: number;
+  price: number;
+};
+
+type Order = {
+  id: string;
+  date: string;
+  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  statusText: string;
+  items: OrderItem[];
+  total: number;
+};
+
 export default function Orders() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +32,7 @@ export default function Orders() {
   const [searchQuery, setSearchQuery] = useState('');
   
   // Empty orders array by default
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   
   useEffect(() => {
     // Check if user is logged in

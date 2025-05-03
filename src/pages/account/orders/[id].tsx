@@ -6,13 +6,69 @@ import { FiChevronRight, FiArrowLeft, FiDownload, FiPackage, FiPhone, FiMail, Fi
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 
+// Define types for order data
+type OrderStatus = 'delivered' | 'processing' | 'shipped' | 'cancelled';
+
+type OrderItem = {
+  id: number;
+  name: string;
+  image: string;
+  quantity: number;
+  price: number;
+  sku: string;
+};
+
+type Order = {
+  id: string | string[];
+  date: string;
+  time: string;
+  total: number;
+  status: OrderStatus;
+  statusText: string;
+  paymentMethod: string;
+  trackingNumber: string;
+  shippingCarrier: string;
+  customer: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  shippingAddress: {
+    fullName: string;
+    address: string;
+    city: string;
+    district: string;
+    zipCode: string;
+    phone: string;
+  };
+  billingAddress: {
+    fullName: string;
+    address: string;
+    city: string;
+    district: string;
+    zipCode: string;
+    phone: string;
+  };
+  items: OrderItem[];
+  subtotal: number;
+  shipping: number;
+  discount: number;
+  timeline: Array<{
+    status: string;
+    date: string;
+    time: string;
+    description: string;
+    completed: boolean;
+  }>;
+};
+
 export default function OrderDetail() {
   const router = useRouter();
   const { id } = router.query;
   
   // This would typically be fetched from an API based on the ID
   // For demo purposes, we'll hardcode a sample order
-  const order = {
+  const order: Order = {
     id: id || 'MV12345678',
     date: '20.05.2023',
     time: '14:30',
@@ -104,7 +160,7 @@ export default function OrderDetail() {
   };
 
   // Status badge styles
-  const statusStyles = {
+  const statusStyles: Record<OrderStatus, string> = {
     delivered: 'bg-green-100 text-green-800',
     processing: 'bg-blue-100 text-blue-800',
     shipped: 'bg-purple-100 text-purple-800',
@@ -424,7 +480,12 @@ export default function OrderDetail() {
 }
 
 // Bu sayfanın özel ikonları için bileşenler
-const FiUser = ({ className, size }) => (
+type IconProps = {
+  className?: string;
+  size: number | string;
+};
+
+const FiUser = ({ className, size }: IconProps) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     width={size} 

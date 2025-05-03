@@ -7,8 +7,25 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
 
+// User type definition
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  memberSince: string;
+};
+
+// Order type definition
+type Order = {
+  id: string;
+  date: string;
+  status: string;
+  total: string;
+};
+
 // Demo kullanıcı verileri (gerçek uygulamada API'dan gelecek)
-const demoUser = {
+const demoUser: User = {
   id: 1,
   name: 'Ahmet Yılmaz',
   email: 'ahmet.yilmaz@example.com',
@@ -21,7 +38,7 @@ export default function Account() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   // Sayfaya erişimde oturum kontrolü (gerçek uygulamada API ile yapılacak)
   useEffect(() => {
@@ -85,7 +102,7 @@ export default function Account() {
   ];
 
   // Örnek son sipariş bilgileri (gerçek uygulamada API'den gelir)
-  const recentOrders = [];
+  const recentOrders: Order[] = [];
 
   if (isLoading) {
     return (
