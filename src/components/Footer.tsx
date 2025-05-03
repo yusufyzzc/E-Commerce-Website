@@ -152,7 +152,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
           <p>&copy; {currentYear} MaviTicaret - {t('footer.allRightsReserved')}</p>
           <p className="mt-2">
-            <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="text-primary-400">
+            <a href="https://www.linkedin.com/in/yusufyazici/" target="_blank" rel="noopener noreferrer" className="text-primary-400">
               Made By Yusuf Yazici E-Trade systems
             </a>
           </p>

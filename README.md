@@ -2,6 +2,10 @@
 
 This project is a modern e-commerce platform utilizing blue color schemes, developed with React, Next.js and TailwindCSS.
 
+## Domain
+
+The website is accessible at [maviticaret.pl](https://maviticaret.pl)
+
 ## Features
 
 - Modern and responsive design
