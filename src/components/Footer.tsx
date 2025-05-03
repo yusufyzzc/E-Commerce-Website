@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
           <p>&copy; {currentYear} MaviTicaret - {t('footer.allRightsReserved')}</p>
           <p className="mt-2">
             <a href="https://www.example.com" target="_blank" rel="noopener noreferrer" className="text-primary-400">
-              T-Soft E-Ticaret Sistemleriyle Hazırlanmıştır.
+              Made By Yusuf Yazici E-Trade systems
             </a>
           </p>
         </div>
