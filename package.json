@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-site",
   "version": "1.0.0",
-  "description": "Mavi tonlarında e-ticaret sitesi",
+  "description": "Blue theme e-commerce site",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

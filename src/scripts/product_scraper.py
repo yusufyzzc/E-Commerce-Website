@@ -402,13 +402,13 @@ def scrape_products():
         product_slug = product['slug']
         all_products[product_slug] = product
     
-    # Ürünleri JavaScript modülü olarak dışa aktar
+    # import products from './products.json'
     js_output = f"const products = {json.dumps(all_products, indent=2, ensure_ascii=False)};\n\nexport default products;"
     
     with open(f'{output_folder}/products.js', 'w', encoding='utf-8') as f:
         f.write(js_output)
     
-    # Ayrıca JSON olarak da kaydet
+    # Save as JSON
     with open(f'{output_folder}/products.json', 'w', encoding='utf-8') as f:
         json.dump(all_products, f, indent=2, ensure_ascii=False)
     

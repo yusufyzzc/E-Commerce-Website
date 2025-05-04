@@ -19,11 +19,6 @@ const PaymentMethodImage: React.FC<PaymentMethodImageProps> = ({
     const lowerName = name.toLowerCase();
     if (lowerName.includes('visa')) return { bg: '#1a1f71', text: '#ffffff', accent: '#f7b600' };
     if (lowerName.includes('master')) return { bg: '#eb001b', text: '#ffffff', accent: '#f79e1b' };
-    if (lowerName.includes('troy')) return { bg: '#00a1df', text: '#ffffff', accent: '#27ae60' };
-    if (lowerName.includes('axess')) return { bg: '#5c2d91', text: '#ffffff', accent: '#e51937' };
-    if (lowerName.includes('maximum')) return { bg: '#0e4171', text: '#ffffff', accent: '#24a95a' };
-    if (lowerName.includes('bonus')) return { bg: '#233d8c', text: '#ffffff', accent: '#f58220' };
-    if (lowerName.includes('paraf')) return { bg: '#f81b22', text: '#ffffff', accent: '#0075be' };
     if (lowerName.includes('card')) return { bg: '#25367a', text: '#ffffff', accent: '#ec921e' };
     
     // Default colors

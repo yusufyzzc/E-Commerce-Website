@@ -39,8 +39,6 @@ const Footer: React.FC = () => {
   const paymentMethods = [
     { name: 'Visa', image: '/images/payments/visa.png' },
     { name: 'MasterCard', image: '/images/payments/mastercard.png' },
-    { name: 'Troy', image: '/images/payments/troy.png' },
-    { name: 'Axess', image: '/images/payments/axess.png' },
     { name: 'PayPal', image: '/images/payments/paypal.png' },
   ];
 
