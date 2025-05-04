@@ -4,10 +4,11 @@
   "description": "Blue theme e-commerce site",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" next build",
     "start": "next start"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "next": "14.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
