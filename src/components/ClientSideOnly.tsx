@@ -20,7 +20,7 @@ interface ClientSideOnlyProps {
 
 const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
   const { t } = useLanguage();
-  const [favorites, setFavorites] = useState<number[]>([]); // Store only IDs instead of full product objects
+  const [favorites, setFavorites] = useState<Product[]>([]);
   const [notification, setNotification] = useState<{
     message: string;
     type: 'success' | 'error' | null;
@@ -31,12 +31,7 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
     try {
       const savedFavorites = localStorage.getItem('favorites');
       if (savedFavorites) {
-        // Parse stored favorites and extract only IDs to reduce memory usage
-        const parsedFavorites = JSON.parse(savedFavorites);
-        const favoriteIds = Array.isArray(parsedFavorites) 
-          ? parsedFavorites.map(item => item.id)
-          : [];
-        setFavorites(favoriteIds);
+        setFavorites(JSON.parse(savedFavorites));
       }
     } catch (error) {
       console.error('Error loading favorites from localStorage:', error);
@@ -45,22 +40,16 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
 
   // Check if a product is in favorites
   const isInFavorites = (productId: number): boolean => {
-    return favorites.includes(productId);
+    return favorites.some(item => item.id === productId);
   };
 
   // Add to favorites
   const handleAddToFavorites = (product: Product) => {
     if (isInFavorites(product.id)) {
       // Remove from favorites if already added
-      const updatedFavorites = favorites.filter(id => id !== product.id);
+      const updatedFavorites = favorites.filter(item => item.id !== product.id);
       setFavorites(updatedFavorites);
-      
-      // Store minimal product data
-      const storedFavorites = updatedFavorites.map(id => {
-        if (id === product.id) return { id: product.id, nameKey: product.nameKey, image: product.image };
-        return { id };
-      });
-      localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       
       setNotification({
         message: t('products.removedFromFavorites'),
@@ -68,15 +57,9 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
       });
     } else {
       // Add to favorites
-      const updatedFavorites = [...favorites, product.id];
+      const updatedFavorites = [...favorites, product];
       setFavorites(updatedFavorites);
-      
-      // Store minimal product data to reduce memory usage
-      const storedFavorites = updatedFavorites.map(id => {
-        if (id === product.id) return { id: product.id, nameKey: product.nameKey, image: product.image };
-        return { id };
-      });
-      localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       
       setNotification({
         message: t('products.addedToFavorites'),
@@ -91,8 +74,9 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
   };
 
   // Add to cart
-  const handleAddToCart = () => {
-    // Simplified version to reduce memory usage
+  const handleAddToCart = (product: Product) => {
+    // Here you would actually add the product to the cart
+    // For demo purposes, just show notification
     setNotification({
       message: t('products.addedToCart'),
       type: 'success'
@@ -106,7 +90,7 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
 
   return (
     <>
-      {/* Notification - shown only when needed */}
+      {/* Notification */}
       {notification.type && (
         <div className={`fixed top-20 right-4 z-50 p-4 rounded-md shadow-md ${
           notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
@@ -143,7 +127,7 @@ const ClientSideOnly: React.FC<ClientSideOnlyProps> = ({ product }) => {
               : 'bg-gray-300 cursor-not-allowed text-gray-500'
           }`}
           disabled={!product.inStock}
-          onClick={handleAddToCart}
+          onClick={() => handleAddToCart(product)}
         >
           <FiShoppingCart className="mr-2" size={16} />
           {t('products.addToCart')}
