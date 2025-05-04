@@ -52,12 +52,15 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [language, setLanguage] = useState<string>('tr');
   const [translations, setTranslations] = useState<Translation>(languages.tr.translations);
 
-  // Initialize language from localStorage if available
+  // Initialize language from localStorage if available - client-side only
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage && languages[savedLanguage]) {
-      setLanguage(savedLanguage);
-      setTranslations(languages[savedLanguage].translations);
+    // Only run in browser environment
+    if (typeof window !== 'undefined') {
+      const savedLanguage = localStorage.getItem('language');
+      if (savedLanguage && languages[savedLanguage]) {
+        setLanguage(savedLanguage);
+        setTranslations(languages[savedLanguage].translations);
+      }
     }
   }, []);
 
@@ -66,7 +69,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     if (languages[langCode]) {
       setLanguage(langCode);
       setTranslations(languages[langCode].translations);
-      localStorage.setItem('language', langCode);
+      
+      // Only access localStorage in browser environment
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('language', langCode);
+      }
     }
   };
 

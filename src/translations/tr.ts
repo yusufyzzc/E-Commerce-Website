@@ -135,6 +135,7 @@ export default {
     description: 'Tüm ürünlerimize göz atın ve sevdiğiniz bir şeyler bulun.',
     new: 'Yeni',
     discount: 'İndirim',
+    inStock: 'Stokta Var',
     outOfStock: 'Stokta Yok',
     addToCart: 'Sepete Ekle',
     addToFavorites: 'Favorilere Ekle',

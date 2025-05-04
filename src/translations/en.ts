@@ -135,6 +135,7 @@ export default {
     description: 'Browse all our products and find something you love.',
     new: 'New',
     discount: 'Discount',
+    inStock: 'In Stock',
     outOfStock: 'Out of Stock',
     addToCart: 'Add to Cart',
     addToFavorites: 'Add to Favorites',
