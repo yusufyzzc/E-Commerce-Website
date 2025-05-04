@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(2);
 
   const slides = [
     {
@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
       titleKey: 'hero.slide1.title',
       descriptionKey: 'hero.slide1.description',
       ctaKey: 'hero.slide1.cta',
-      image: "/images/hero-1.jpg",
+      image: "/images/slide_pictures/summer.jpg",
       href: "/collection/summer",
       color: "from-primary-600 to-primary-900",
     },
@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
       titleKey: 'hero.slide2.title',
       descriptionKey: 'hero.slide2.description',
       ctaKey: 'hero.slide2.cta',
-      image: "/images/hero-2.jpg",
+      image: "/images/slide_pictures/discount.jpg",
       href: "/promotions",
       color: "from-secondary-600 to-secondary-900",
     },
@@ -31,9 +31,9 @@ const Hero: React.FC = () => {
       titleKey: 'hero.slide3.title',
       descriptionKey: 'hero.slide3.description',
       ctaKey: 'hero.slide3.cta',
-      image: "/images/hero-3.jpg",
+      image: "/images/slide_pictures/new_season.jpeg",
       href: "/new-arrivals",
-      color: "from-accent-600 to-accent-900",
+      color: "from-blue-400 to-blue-600",
     },
   ];
 

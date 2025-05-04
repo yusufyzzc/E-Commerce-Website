@@ -110,7 +110,7 @@ const allProducts: Product[] = [
     price: 120.00,
     originalPrice: 150.00,
     discount: 20,
-    image: '/images/products/altin_yildiz_sus.jpg',
+    image: '/images/products/altin rengi yildiz süs.jpg',
     href: '/product/altin-rengi-yildiz-sus',
     isNew: true,
     inStock: true,

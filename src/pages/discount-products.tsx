@@ -192,14 +192,14 @@ export default function DiscountProducts() {
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h2 className="text-2xl font-bold mb-4">İndirim Kampanyası Hakkında</h2>
               <p className="text-gray-700 mb-4">
-                Tüm ürünlerde geçerli %15 indirim kampanyamız 10 Mayıs tarihine kadar devam etmektedir. 
+                Tüm ürünlerde geçerli %15 indirim kampanyamız X tarihine kadar devam etmektedir. 
                 Sepetinize ürün ekledikten sonra ödeme adımında "MAVI15" kupon kodunu kullanarak indirimden yararlanabilirsiniz.
               </p>
               <p className="text-gray-700 mb-4">
                 Kampanya koşulları:
               </p>
               <ul className="list-disc pl-5 text-gray-700 space-y-2 mb-4">
-                <li>Kampanya 10 Mayıs tarihine kadar geçerlidir.</li>
+                <li>Kampanya X tarihine kadar geçerlidir.</li>
                 <li>Her müşteri kampanyadan bir kez yararlanabilir.</li>
                 <li>İndirim, sepet toplamı 300 TL ve üzeri alışverişlerde geçerlidir.</li>
                 <li>Diğer kampanyalarla birleştirilemez.</li>

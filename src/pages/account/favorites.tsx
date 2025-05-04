@@ -26,62 +26,39 @@ type FavoriteItem = {
 
 
 // Tipli demoFavorites dizisi
-let demoFavorites: FavoriteItem[] = [
-  {
-    id: 1,
-    nameKey: 'products.silverNecklace',
-    price: 149.99,
-    originalPrice: 179.99,
-    discount: 16,
-    image: '/images/products/gumus kaplama kolye.jpg',
-    href: '/product/gumus-kaplama-kolye',
-    inStock: true,
-    isNew: false
-  },
-  {
-    id: 2,
-    nameKey: 'products.pearlBracelet',
-    price: 129.99,
-    originalPrice: 159.99,
-    discount: 18,
-    image: '/images/products/inci bileklik.jpeg',
-    href: '/product/inci-bileklik',
-    inStock: true,
-    isNew: true
-  },
-  {
-    id: 3,
-    nameKey: 'products.decorativeCandleSet',
-    price: 89.99,
-    originalPrice: 89.99,
-    discount: 0,
-    image: '/images/products/dekoratif_mum_seti.png',
-    href: '/product/dekoratif-mum-seti',
-    inStock: true,
-    isNew: false
-  },
-  {
-    id: 4,
-    nameKey: 'products.blueStuffedBear',
-    price: 69.99,
-    originalPrice: 99.99,
-    discount: 30,
-    image: '/images/products/mavi_pelus_ayicik.jpeg',
-    href: '/product/mavi-pelus-ayicik',
-    inStock: false,
-    isNew: false
-  }
-];
+let demoFavorites: FavoriteItem[] = [];
 
 
 export default function Favorites() {
   const { t } = useLanguage();
-  const [favorites, setFavorites] = useState(demoFavorites);
-  const [filteredFavorites, setFilteredFavorites] = useState(demoFavorites);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [filteredFavorites, setFilteredFavorites] = useState<FavoriteItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' | null }>({ message: '', type: null });
+
+  // Load favorites from localStorage on component mount
+  useEffect(() => {
+    try {
+      const savedFavorites = localStorage.getItem('favorites');
+      if (savedFavorites) {
+        const parsedFavorites = JSON.parse(savedFavorites);
+        setFavorites(parsedFavorites);
+      }
+    } catch (error) {
+      console.error('Error loading favorites from localStorage:', error);
+    }
+  }, []);
+
+  // Save favorites to localStorage when they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (error) {
+      console.error('Error saving favorites to localStorage:', error);
+    }
+  }, [favorites]);
 
   // Apply filters and search
   useEffect(() => {
@@ -212,7 +189,7 @@ export default function Favorites() {
         )}
 
         {/* Search and filter section - only show when we have favorites */}
-        {filteredFavorites.length > 0 && (
+        {favorites.length > 0 && (
           <div className="mb-6 flex flex-col md:flex-row gap-4">
             <div className="relative flex-grow">
               <input
@@ -284,9 +261,9 @@ export default function Favorites() {
           </div>
         )}
 
-        {/* Favorites list */}
-        {filteredFavorites.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Favorites Grid or Empty State */}
+        {favorites.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredFavorites.map((product) => (
               <div key={product.id} className="card group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="relative overflow-hidden">
@@ -360,13 +337,15 @@ export default function Favorites() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-lg shadow-sm">
-            <div className="mx-auto w-16 h-16 mb-4 flex items-center justify-center bg-gray-100 rounded-full">
-              <FiHeart className="text-gray-400" size={32} />
+          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <div className="w-20 h-20 bg-gray-100 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiHeart size={40} />
             </div>
-            <h3 className="text-xl font-medium text-gray-800 mb-2">{t('favorites.emptyFavorites')}</h3>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">{t('favorites.emptyFavoritesDesc')}</p>
-            <Link href="/" className="btn btn-primary">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('favorites.emptyFavorites')}</h2>
+            <p className="text-gray-600 mb-6 max-w-md mx-auto">
+              {t('favorites.emptyFavoritesDesc')}
+            </p>
+            <Link href="/products" className="btn btn-primary">
               {t('favorites.startShopping')}
             </Link>
           </div>

@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
           
           <div className="text-center md:text-right">
             <p className="text-gray-400 text-sm mb-2">
-              {t('footer.newsletter')}
+              {/* Newsletter yazısını siliyorum */}
             </p>
           </div>
         </div>
@@ -104,9 +104,9 @@ const Footer: React.FC = () => {
             <div className="mt-6">
               <h4 className="font-semibold mb-3">{t('footer.contactUs')}</h4>
               <address className="text-gray-400 not-italic mb-3">
-                <p>Atatürk Mah. E-Ticaret Cad.</p>
-                <p>No:123 Kat:4 Daire:15</p>
-                <p>Ataşehir/İstanbul</p>
+                <p>Atatürk Mah.</p>
+                <p>No:123 Kat:4</p>
+                <p>Sarıyer/İstanbul</p> 
               </address>
               <p className="text-gray-400">
                 <strong className="text-white">{t('stores.phone')}:</strong> 0850 123 4567

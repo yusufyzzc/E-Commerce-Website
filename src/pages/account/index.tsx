@@ -6,15 +6,7 @@ import { FiChevronRight, FiUser, FiPackage, FiHeart, FiMapPin, FiCreditCard, FiL
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useLanguage } from '../../context/LanguageContext';
-
-// User type definition
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  memberSince: string;
-};
+import { useAuth } from '../../context/AuthContext';
 
 // Order type definition
 type Order = {
@@ -24,47 +16,20 @@ type Order = {
   total: string;
 };
 
-// Demo kullanıcı verileri (gerçek uygulamada API'dan gelecek)
-const demoUser: User = {
-  id: 1,
-  name: 'Ahmet Yılmaz',
-  email: 'ahmet.yilmaz@example.com',
-  phone: '+90 555 123 4567',
-  memberSince: '01.01.2023'
-};
-
 export default function Account() {
   const { t } = useLanguage();
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const { user, isAuthenticated, isLoading, logout } = useAuth();
 
-  // Sayfaya erişimde oturum kontrolü (gerçek uygulamada API ile yapılacak)
+  // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
   useEffect(() => {
-    // Demo amaçlı yükleme durumu simulasyonu
-    const timer = setTimeout(() => {
-      // Gerçek uygulamada burada oturum kontrolü yapılacak
-      const loggedIn = true; // Demo için her zaman true
-      
-      if (loggedIn) {
-        setIsLoggedIn(true);
-        setUser(demoUser);
-      } else {
-        // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
-        router.push('/login');
-      }
-      
-      setIsLoading(false);
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, [router]);
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isLoading, isAuthenticated, router]);
 
   const handleLogout = () => {
-    // Gerçek uygulamada burada logout API çağrısı yapılacak
-    // Sonra anasayfaya yönlendirilecek
-    router.push('/');
+    logout();
   };
 
   // Hesap menü öğeleri
@@ -112,8 +77,8 @@ export default function Account() {
     );
   }
 
-  if (!isLoggedIn) {
-    return null; // useEffect içinde yönlendirme yapıyoruz, boş render
+  if (!isAuthenticated) {
+    return null; // useEffect içinde login sayfasına yönlendiriyoruz, boş render
   }
 
   return (
@@ -141,7 +106,7 @@ export default function Account() {
           
           {/* Welcome Section */}
           <div className="bg-primary-600 text-white rounded-lg p-6 md:p-8 mb-8">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('account.welcome')}, {user?.name || t('general.user')}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('account.welcome')}, {user?.name}</h1>
             <p className="text-primary-100">
               {t('account.welcomeDesc')}
             </p>
@@ -258,14 +223,14 @@ export default function Account() {
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold text-gray-500">{t('account.memberSince')}</h3>
-                      <p className="mt-1">{user?.memberSince || new Date().toLocaleDateString()}</p>
+                      <p className="mt-1">{user?.memberSince || '-'}</p>
                     </div>
                   </div>
                   
-                  <div className="mt-4">
+                  <div className="mt-4 pt-4 border-t border-gray-200">
                     <Link 
                       href="/account/profile" 
-                      className="text-sm text-primary-600 hover:text-primary-700"
+                      className="text-sm font-medium text-primary-600 hover:text-primary-700"
                     >
                       {t('account.edit')}
                     </Link>

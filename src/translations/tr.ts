@@ -47,8 +47,8 @@ export default {
 
   // Ana Sayfa
   home: {
-    title: 'MaviTicaret | Alışverişin Mavi Dünyası',
-    description: 'En kaliteli ürünlerin online alışveriş sitesi',
+    title: 'MaviTicaret - En İyi Online Alışveriş Deneyimi',
+    description: 'MaviTicaret ile en iyi online alışveriş deneyimini yaşayın. Binlerce ürün, uygun fiyatlar ve hızlı teslimat.',
     categories: 'Kategoriler',
     featuredProducts: 'Öne Çıkan Ürünler',
     viewAll: 'Tümünü Gör',
@@ -63,7 +63,7 @@ export default {
     },
     slide2: {
       title: 'Özel İndirimler',
-      description: '%50\'ye varan indirimler',
+      description: '%60\'a varan indirimler',
       cta: 'İndirimleri Keşfet',
     },
     slide3: {
@@ -80,7 +80,7 @@ export default {
     privacyNote: 'Gizlilik politikamızı okuyun, dilediğiniz zaman abonelikten çıkabilirsiniz.',
     limitedTime: 'Sınırlı Süre',
     discount: 'Tüm Ürünlerde %15 İndirim',
-    discountDescription: 'Tüm siparişlerde geçerli indirim fırsatını kaçırmayın! Kampanya 10 Mayıs tarihine kadar geçerlidir.',
+    discountDescription: 'Tüm siparişlerde geçerli indirim fırsatını kaçırmayın! Kampanya X tarihine kadar geçerlidir.',
     couponCode: 'Kupon Kodu',
     discoverDiscounts: 'İndirimleri Keşfet',
   },
@@ -131,9 +131,17 @@ export default {
 
   // Ürünler
   products: {
+    title: 'Tüm Ürünler',
+    description: 'Tüm ürünlerimize göz atın ve sevdiğiniz bir şeyler bulun.',
     new: 'Yeni',
     discount: 'İndirim',
+    outOfStock: 'Stokta Yok',
     addToCart: 'Sepete Ekle',
+    addToFavorites: 'Favorilere Ekle',
+    removeFromFavorites: 'Favorilerden Çıkar',
+    addedToFavorites: 'Favorilere eklendi!',
+    removedFromFavorites: 'Favorilerden çıkarıldı!',
+    addedToCart: 'Sepete eklendi!',
     pelusAyicikAnahtarlik: {
       name: 'Peluş Ayıcık Anahtarlık',
     },
@@ -447,9 +455,9 @@ export default {
     subtitle: 'Favori ürünlerinizi bu sayfada görüntüleyebilir ve yönetebilirsiniz.',
     backToAccount: 'Hesabıma Dön',
     search: 'Favori ürünlerinizde arayın...',
-    emptyFavorites: 'Favorileriniz Boş',
-    emptyFavoritesDesc: 'Henüz favori ürününüz bulunmamaktadır. Alışverişe başlayarak favori ürünlerinizi ekleyebilirsiniz.',
-    startShopping: 'Alışverişe Başla',
+    emptyFavorites: 'Favori Listeniz Boş',
+    emptyFavoritesDesc: 'Henüz favorilerinize hiç ürün eklemediniz. Beğendiğiniz ürünleri eklemek için ürünlerimize göz atın!',
+    startShopping: 'Ürünlere Göz At',
     addToCart: 'Sepete Ekle',
     removeFromFavorites: 'Favorilerden Çıkar',
     addedToCart: 'Ürün sepete eklendi!',
@@ -466,5 +474,46 @@ export default {
       clearAll: 'Filtreleri Temizle',
       apply: 'Uygula',
     },
+  },
+
+  // Profile Page
+  profile: {
+    title: 'Profili Düzenle',
+    description: 'Kişisel bilgilerinizi ve iletişim detaylarınızı güncelleyin.',
+    name: 'Ad Soyad',
+    namePlaceholder: 'Ad soyadınızı girin',
+    email: 'E-posta Adresi',
+    emailPlaceholder: 'E-posta adresinizi girin',
+    phone: 'Telefon Numarası',
+    phonePlaceholder: 'Telefon numaranızı girin',
+    memberSince: 'Üyelik Tarihi',
+    saveButton: 'Değişiklikleri Kaydet',
+    updateSuccess: 'Profiliniz başarıyla güncellendi.',
+    errors: {
+      nameRequired: 'Ad soyad alanı zorunludur',
+      emailRequired: 'E-posta adresi zorunludur',
+      invalidEmail: 'Lütfen geçerli bir e-posta adresi girin',
+      updateFailed: 'Profil güncellemesi başarısız oldu. Lütfen tekrar deneyin.'
+    }
+  },
+
+  // Change Password Page
+  changePassword: {
+    title: 'Şifre Değiştir',
+    description: 'Hesabınızın güvenliğini sağlamak için şifrenizi güncelleyin.',
+    currentPassword: 'Mevcut Şifre',
+    newPassword: 'Yeni Şifre',
+    confirmPassword: 'Yeni Şifre Tekrar',
+    saveButton: 'Şifreyi Güncelle',
+    updateSuccess: 'Şifreniz başarıyla güncellendi.',
+    errors: {
+      currentPasswordRequired: 'Mevcut şifre zorunludur',
+      newPasswordRequired: 'Yeni şifre zorunludur',
+      confirmPasswordRequired: 'Şifre onayı zorunludur',
+      passwordLength: 'Şifre en az 6 karakter olmalıdır',
+      passwordsMatch: 'Şifreler eşleşmiyor',
+      incorrectPassword: 'Girdiğiniz mevcut şifre yanlış',
+      updateFailed: 'Şifre güncellemesi başarısız oldu. Lütfen tekrar deneyin.'
+    }
   },
 } as const; 

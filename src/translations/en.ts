@@ -47,8 +47,8 @@ export default {
 
   // Home Page
   home: {
-    title: 'MaviTicaret | Blue World of Shopping',
-    description: 'Online shopping site for the highest quality products',
+    title: 'MaviTicaret - The Best Online Shopping Experience',
+    description: 'Experience the best online shopping with MaviTicaret. Thousands of products, affordable prices, and fast delivery.',
     categories: 'Categories',
     featuredProducts: 'Featured Products',
     viewAll: 'View All',
@@ -63,7 +63,7 @@ export default {
     },
     slide2: {
       title: 'Special Discounts',
-      description: 'Up to 50% discount',
+      description: 'Up to 60% discount',
       cta: 'Explore Discounts',
     },
     slide3: {
@@ -131,9 +131,17 @@ export default {
 
   // Products
   products: {
+    title: 'All Products',
+    description: 'Browse all our products and find something you love.',
     new: 'New',
     discount: 'Discount',
+    outOfStock: 'Out of Stock',
     addToCart: 'Add to Cart',
+    addToFavorites: 'Add to Favorites',
+    removeFromFavorites: 'Remove from Favorites',
+    addedToFavorites: 'Added to favorites!',
+    removedFromFavorites: 'Removed from favorites!',
+    addedToCart: 'Added to cart!',
     pelusAyicikAnahtarlik: {
       name: 'Plush Teddy Bear Keychain',
     },
@@ -447,9 +455,9 @@ export default {
     subtitle: 'View and manage your favorite products on this page.',
     backToAccount: 'Back to My Account',
     search: 'Search in your favorites...',
-    emptyFavorites: 'Your Favorites are Empty',
-    emptyFavoritesDesc: 'You haven\'t added any favorites yet. Start shopping to add items to your favorites.',
-    startShopping: 'Start Shopping',
+    emptyFavorites: 'Your Favorites List is Empty',
+    emptyFavoritesDesc: 'You haven\'t added any products to your favorites yet. Browse our products to add items you like!',
+    startShopping: 'Browse Products',
     addToCart: 'Add to Cart',
     removeFromFavorites: 'Remove from Favorites',
     addedToCart: 'Product added to cart!',
@@ -466,5 +474,46 @@ export default {
       clearAll: 'Clear All',
       apply: 'Apply',
     },
+  },
+
+  // Profile Page
+  profile: {
+    title: 'Edit Profile',
+    description: 'Update your personal information and contact details.',
+    name: 'Full Name',
+    namePlaceholder: 'Enter your full name',
+    email: 'Email Address',
+    emailPlaceholder: 'Enter your email address',
+    phone: 'Phone Number',
+    phonePlaceholder: 'Enter your phone number',
+    memberSince: 'Member Since',
+    saveButton: 'Save Changes',
+    updateSuccess: 'Your profile has been updated successfully.',
+    errors: {
+      nameRequired: 'Full name is required',
+      emailRequired: 'Email address is required',
+      invalidEmail: 'Please enter a valid email address',
+      updateFailed: 'Profile update failed. Please try again.'
+    }
+  },
+
+  // Change Password Page
+  changePassword: {
+    title: 'Change Password',
+    description: 'Update your account password to keep your account secure.',
+    currentPassword: 'Current Password',
+    newPassword: 'New Password',
+    confirmPassword: 'Confirm New Password',
+    saveButton: 'Update Password',
+    updateSuccess: 'Your password has been updated successfully.',
+    errors: {
+      currentPasswordRequired: 'Current password is required',
+      newPasswordRequired: 'New password is required',
+      confirmPasswordRequired: 'Password confirmation is required',
+      passwordLength: 'Password must be at least 6 characters',
+      passwordsMatch: 'Passwords do not match',
+      incorrectPassword: 'The current password you entered is incorrect',
+      updateFailed: 'Password update failed. Please try again.'
+    }
   },
 } as const; 
